@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Listino tessuti</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Listino">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#1f47a8">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" href="data:image/png;base64,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">
+<style>
+  :root{
+    --paper:#f4f5f7; --card:#ffffff; --ink:#16233a; --ink-soft:#5b6880;
+    --pen:#1f47a8; --pen-weak:#e6ebf8; --rule:#d6dbe4; --warn:#a8331f; --ok:#1d6b4a;
+    --radius:10px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#10141c; --card:#181e29; --ink:#e7ecf5; --ink-soft:#95a1b6;
+      --pen:#8fb0ff; --pen-weak:#1e2a44; --rule:#2a3446; --warn:#e08573; --ok:#6fc79b;
+    }
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--paper);
+    background-image:repeating-linear-gradient(to bottom, transparent 0 31px, rgba(127,143,170,.10) 31px 32px);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:17px; line-height:1.45; -webkit-text-size-adjust:100%;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .wrap{max-width:640px;margin:0 auto;padding:calc(18px + env(safe-area-inset-top)) 16px calc(90px + env(safe-area-inset-bottom))}
+
+  header{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+  h1{font-size:22px;font-weight:700;letter-spacing:-.02em;margin:0;color:var(--pen)}
+  h1 span{display:block;font-size:12px;font-weight:500;letter-spacing:0;color:var(--ink-soft)}
+  #sync{font-size:12px;color:var(--ink-soft);margin:6px 0 14px}
+  #sync b{font-weight:600;color:var(--warn)}
+  .linkbtn{
+    background:none;border:none;padding:6px 0;margin:0;cursor:pointer;font:inherit;
+    font-size:14px;font-weight:600;color:var(--pen);text-decoration:underline;
+    text-underline-offset:3px;white-space:nowrap;
+  }
+  .linkbtn:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--pen);outline-offset:2px}
+
+  .searchbar{position:relative;margin-bottom:8px}
+  #q{
+    width:100%;padding:16px 44px 16px 16px;font:inherit;font-size:19px;font-weight:500;
+    color:var(--ink);background:var(--card);border:1.5px solid var(--rule);border-radius:var(--radius);
+    -webkit-appearance:none;appearance:none;
+  }
+  #q::placeholder{color:var(--ink-soft);font-weight:400}
+  #q:focus{border-color:var(--pen)}
+  #clear{
+    position:absolute;right:6px;top:50%;transform:translateY(-50%);width:34px;height:34px;
+    border:none;background:none;cursor:pointer;color:var(--ink-soft);font-size:20px;line-height:1;border-radius:50%;
+  }
+
+  .filters{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 14px}
+  .chip{
+    font:inherit;font-size:13px;font-weight:600;padding:5px 11px;border-radius:999px;cursor:pointer;
+    border:1.5px solid var(--rule);background:transparent;color:var(--ink-soft);
+  }
+  .chip[aria-pressed="true"]{background:var(--pen);border-color:var(--pen);color:var(--card)}
+
+  ul.list{list-style:none;margin:0;padding:0;background:var(--card);border:1.5px solid var(--rule);border-radius:var(--radius);overflow:hidden}
+  ul.list:empty{display:none;border:none}
+  li.row{display:flex;align-items:center;border-top:1px solid var(--rule)}
+  li.row:first-child{border-top:none}
+  li.row button.pick{
+    flex:1;display:flex;align-items:baseline;gap:10px;padding:14px 16px;background:none;border:none;
+    cursor:pointer;font:inherit;text-align:left;color:var(--ink);width:100%;
+  }
+  li.row button.pick:active{background:var(--pen-weak)}
+  .nm{font-weight:600;letter-spacing:-.01em}
+  .grp{font-size:11px;font-weight:600;color:var(--ink-soft);border:1px solid var(--rule);border-radius:4px;padding:1px 5px;white-space:nowrap}
+  .pr{margin-left:auto;font-weight:700;color:var(--pen);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .empty{padding:28px 16px;text-align:center;color:var(--ink-soft);font-size:15px}
+  .empty b{color:var(--ink)}
+
+  dialog{border:none;padding:0;background:transparent;max-width:100%;width:100%;margin:auto auto 0}
+  dialog::backdrop{background:rgba(10,15,25,.45)}
+  .sheet{
+    background:var(--card);color:var(--ink);border-radius:16px 16px 0 0;
+    padding:22px 18px calc(22px + env(safe-area-inset-bottom));max-width:640px;margin:0 auto;
+    border-top:3px solid var(--pen);
+  }
+  @media(min-width:660px){ dialog{margin:auto} .sheet{border-radius:14px} }
+  .sheet h2{margin:0;font-size:21px;font-weight:700;letter-spacing:-.01em}
+  .sheet .meta{color:var(--ink-soft);font-size:13px;margin:2px 0 18px}
+  .bigprice{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  #amount{
+    width:100%;font:inherit;font-size:44px;font-weight:700;letter-spacing:-.03em;color:var(--pen);
+    background:transparent;border:none;border-bottom:2px dashed var(--rule);padding:2px 0;
+    font-variant-numeric:tabular-nums;-webkit-appearance:none;appearance:none;border-radius:0;
+  }
+  #amount:focus{border-bottom-color:var(--pen);outline:none}
+  .cur{font-size:30px;font-weight:600;color:var(--pen)}
+  .listinonote{font-size:13px;color:var(--ink-soft);min-height:20px;margin-bottom:14px}
+  .listinonote button{font:inherit;font-size:13px;background:none;border:none;color:var(--pen);text-decoration:underline;cursor:pointer;padding:0 0 0 6px}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px}
+  .steps button{
+    font:inherit;font-size:15px;font-weight:600;padding:11px 0;cursor:pointer;background:var(--pen-weak);
+    color:var(--pen);border:none;border-radius:8px;font-variant-numeric:tabular-nums;
+  }
+  .sheet .actions{display:flex;gap:10px}
+  .primary{flex:1;font:inherit;font-size:17px;font-weight:600;padding:15px;cursor:pointer;background:var(--pen);color:#fff;border:none;border-radius:10px}
+  .secondary{font:inherit;font-size:17px;font-weight:600;padding:15px 20px;cursor:pointer;background:transparent;color:var(--ink-soft);border:1.5px solid var(--rule);border-radius:10px}
+
+  .panel{background:var(--card);border:1.5px solid var(--rule);border-radius:var(--radius);padding:16px;margin-bottom:14px}
+  .panel h3{margin:0 0 4px;font-size:16px;font-weight:700}
+  .panel p{margin:0 0 12px;font-size:14px;color:var(--ink-soft)}
+  .field{display:flex;gap:8px;margin-bottom:8px}
+  .field input,.field select{
+    font:inherit;font-size:16px;padding:11px;border:1.5px solid var(--rule);border-radius:8px;
+    background:var(--paper);color:var(--ink);min-width:0;-webkit-appearance:none;appearance:none;
+  }
+  .field input.nmi{flex:1}
+  .field input.pri{width:86px;font-variant-numeric:tabular-nums}
+  .field .del{font:inherit;background:none;border:none;color:var(--warn);cursor:pointer;font-size:15px;font-weight:600;padding:0 4px}
+  textarea{
+    width:100%;min-height:96px;font:inherit;font-size:13px;line-height:1.4;padding:10px;
+    border:1.5px solid var(--rule);border-radius:8px;background:var(--paper);color:var(--ink);resize:vertical;
+  }
+  .rowbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .rowbtns button{font:inherit;font-size:14px;font-weight:600;padding:10px 14px;cursor:pointer;border-radius:8px;border:1.5px solid var(--rule);background:transparent;color:var(--ink)}
+  .rowbtns button.go{background:var(--pen);border-color:var(--pen);color:#fff}
+  .rowbtns button.danger{color:var(--warn);border-color:var(--warn)}
+  .small{font-size:12px;color:var(--ink-soft);margin-top:10px}
+
+  #toast{
+    position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);background:var(--ink);color:var(--paper);
+    padding:11px 18px;border-radius:999px;font-size:15px;font-weight:600;opacity:0;pointer-events:none;
+    transition:opacity .18s, transform .18s;z-index:50;max-width:90vw;text-align:center;
+  }
+  #toast.on{opacity:1;transform:translate(-50%,0)}
+  @media (prefers-reduced-motion: reduce){#toast{transition:none}}
+  .hide{display:none !important}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Listino<span id="count"></span></h1>
+    <button class="linkbtn" id="toggleEdit">Modifica</button>
+  </header>
+  <div id="sync"></div>
+
+  <div id="viewSearch">
+    <div class="searchbar">
+      <input id="q" type="search" autocomplete="off" autocapitalize="characters" spellcheck="false"
+             placeholder="Scrivi il nome dell'articolo" aria-label="Cerca articolo">
+      <button id="clear" class="hide" aria-label="Cancella ricerca">&times;</button>
+    </div>
+    <div class="filters" id="filters"></div>
+    <ul class="list" id="results"></ul>
+    <div class="empty" id="empty"></div>
+  </div>
+
+  <div id="viewEdit" class="hide">
+    <div class="panel">
+      <h3>Aggiungi articolo</h3>
+      <p>Nome e prezzo. Il gruppo serve solo a ritrovarlo più in fretta.</p>
+      <div class="field">
+        <input class="nmi" id="newName" placeholder="Nome" autocapitalize="characters">
+        <input class="pri" id="newPrice" placeholder="0,00" inputmode="decimal">
+      </div>
+      <div class="field">
+        <select id="newGroup"></select>
+        <button class="primary" id="addBtn" style="flex:0 0 auto;padding:11px 18px;font-size:16px">Aggiungi</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>Articoli</h3>
+      <p>Tocca un nome o un prezzo per correggerlo. Si salva da solo.</p>
+      <div id="editList"></div>
+    </div>
+
+    <div class="panel">
+      <h3>Salva una copia nei File</h3>
+      <p>Esporta ogni tanto: è la copia che ti rimette in piedi il listino se cambi telefono o togli l'icona.</p>
+      <div class="rowbtns">
+        <button class="go" id="exportFile">Esporta il listino</button>
+        <button id="importFile">Carica da un file</button>
+      </div>
+      <input type="file" id="fileInput" accept=".json,application/json,text/plain" class="hide">
+      <div class="small" id="lastExport"></div>
+    </div>
+
+    <div class="panel">
+      <h3>Copia di sicurezza a mano</h3>
+      <p>Se preferisci, incolla questo testo in una nota. Lo stesso testo si può rimettere qui per ricaricare tutto.</p>
+      <textarea id="backup" spellcheck="false"></textarea>
+      <div class="rowbtns">
+        <button id="copyBackup">Copia il testo</button>
+        <button class="go" id="loadBackup">Carica dal testo</button>
+        <button class="danger" id="resetAll">Torna al listino di partenza</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<dialog id="sheet">
+  <div class="sheet">
+    <h2 id="dName">—</h2>
+    <div class="meta" id="dMeta"></div>
+    <div class="bigprice">
+      <input id="amount" inputmode="decimal" aria-label="Prezzo da inviare">
+      <span class="cur">€</span>
+    </div>
+    <div class="listinonote" id="dNote"></div>
+    <div class="steps">
+      <button data-step="-0.5">−0,50</button>
+      <button data-step="-0.1">−0,10</button>
+      <button data-step="0.1">+0,10</button>
+      <button data-step="0.5">+0,50</button>
+    </div>
+    <div class="actions">
+      <button class="primary" id="copyOne">Copia prezzo</button>
+      <button class="secondary" id="closeSheet">Chiudi</button>
+    </div>
+  </div>
+</dialog>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  var KEY = "listino-tessuti-v3";
+  var EXP_KEY = "listino-tessuti-export-v3";
+  var GROUPS = ["Listino", "A1", "Italia"];
+
+  var ORIGINALE = [
+    {n:"SYN2902", p:3.90, g:"Listino"},
+    {n:"BOA", p:10.90, g:"Listino"},
+    {n:"COSTANTE", p:7.70, g:"Listino"},
+    {n:"BARBONCINO", p:10.90, g:"Listino"},
+    {n:"PUFFOLO", p:6.90, g:"Listino"},
+    {n:"PUNTA", p:9.10, g:"Listino"},
+    {n:"VISCERA", p:4.30, g:"Listino"},
+    {n:"COMPRESO", p:4.70, g:"Listino"},
+    {n:"MINIMAL 22", p:4.10, g:"Listino"},
+    {n:"CAVALLO", p:13.40, g:"Listino"},
+    {n:"PELLE DAINO DIS", p:9.00, g:"Listino"},
+    {n:"COMPOSTO", p:4.30, g:"Listino"},
+    {n:"49462", p:2.80, g:"Listino"},
+    {n:"MEMORIA GRS", p:3.30, g:"Listino"},
+    {n:"DUBLE DINO", p:11.70, g:"Listino"},
+    {n:"CANNELLA", p:6.70, g:"Listino"},
+    {n:"TARTARUGA", p:6.50, g:"A1"},
+    {n:"CRESTA", p:6.70, g:"A1"},
+    {n:"WOLF", p:5.90, g:"A1"},
+    {n:"NOCCIOLINA", p:6.30, g:"A1"},
+    {n:"PELLE DAINO", p:4.50, g:"A1"},
+    {n:"SUEDE INV", p:5.80, g:"A1"},
+    {n:"REAL SUEDE", p:5.80, g:"A1"},
+    {n:"LOYAL METALLICO", p:3.90, g:"A1"},
+    {n:"TALLO", p:5.80, g:"A1"},
+    {n:"PUP ENZIME", p:3.30, g:"A1"},
+    {n:"CHICCOS", p:2.60, g:"A1"},
+    {n:"DRILL", p:4.80, g:"A1"},
+    {n:"GABRY", p:4.40, g:"A1"},
+    {n:"VISCONT", p:5.50, g:"Italia"},
+    {n:"EVD", p:5.80, g:"Italia"},
+    {n:"EVD 100", p:5.90, g:"Italia"},
+    {n:"ABRAM 100/200", p:5.15, g:"Italia"},
+    {n:"ONAN 250", p:5.45, g:"Italia"},
+    {n:"SAINT JEAN 200", p:5.10, g:"Italia"},
+    {n:"BALAM 300", p:5.00, g:"Italia"},
+    {n:"CILENTO L", p:6.45, g:"Italia"}
+  ];
+
+  var items = [];
+  var filter = "";
+  var current = null;
+  var editing = false;
+  var storageOk = true;
+
+  /* ---------- utilità ---------- */
+  function norm(s){
+    return String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]/g,"");
+  }
+  function fmt(v){ return (Math.round(v*100)/100).toFixed(2).replace(".",","); }
+  function parseNum(s){
+    var v = parseFloat(String(s).replace(/[^0-9,.\-]/g,"").replace(",","."));
+    return isFinite(v) ? v : NaN;
+  }
+  function clean(arr){
+    if(!Array.isArray(arr)) return [];
+    return arr.filter(function(o){ return o && o.n; }).map(function(o){
+      return { n:String(o.n).trim(), p:isFinite(o.p)?Number(o.p):0, g:GROUPS.indexOf(o.g)>-1?o.g:"Listino" };
+    });
+  }
+  function serial(){ return JSON.stringify(items); }
+  function toast(msg){
+    var t = document.getElementById("toast");
+    t.textContent = msg; t.classList.add("on");
+    clearTimeout(t._h); t._h = setTimeout(function(){ t.classList.remove("on"); }, 2000);
+  }
+  function copyText(txt, okMsg){
+    function fallback(){
+      var ta = document.createElement("textarea");
+      ta.value = txt; ta.style.position="fixed"; ta.style.opacity="0";
+      document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, txt.length);
+      var ok=false; try{ ok = document.execCommand("copy"); }catch(e){}
+      document.body.removeChild(ta);
+      toast(ok ? okMsg : "Copia non riuscita, seleziona a mano");
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(function(){ toast(okMsg); }, fallback);
+    } else { fallback(); }
+  }
+  function twoDigits(n){ return (n<10?"0":"") + n; }
+  function dateLabel(d){
+    return twoDigits(d.getDate()) + "/" + twoDigits(d.getMonth()+1) + "/" + d.getFullYear();
+  }
+
+  /* ---------- memoria ---------- */
+  function save(){
+    try{
+      localStorage.setItem(KEY, serial());
+      storageOk = true;
+    }catch(e){
+      storageOk = false;
+      toast("Non riesco a salvare qui: esporta il file");
+    }
+    setStatus();
+  }
+  function load(){
+    try{
+      var raw = localStorage.getItem(KEY);
+      if(raw){
+        var arr = clean(JSON.parse(raw));
+        if(arr.length){ items = arr; return; }
+      }
+    }catch(e){ storageOk = false; }
+    items = clean(ORIGINALE);
+    save();
+  }
+  function setStatus(){
+    var el = document.getElementById("sync");
+    if(!storageOk){
+      el.innerHTML = "<b>Questo browser non salva le modifiche</b> · usa Esporta per non perderle";
+      return;
+    }
+    var when = "";
+    try{ when = localStorage.getItem(EXP_KEY) || ""; }catch(e){}
+    el.textContent = "Salvato su questo dispositivo" +
+      (when ? " · ultima copia esportata il " + when : " · nessuna copia esportata");
+  }
+
+  /* ---------- ricerca ---------- */
+  var qEl = document.getElementById("q");
+  var clearEl = document.getElementById("clear");
+  var resEl = document.getElementById("results");
+  var emptyEl = document.getElementById("empty");
+
+  function buildFilters(){
+    var box = document.getElementById("filters");
+    box.innerHTML = "";
+    [""].concat(GROUPS).forEach(function(g){
+      var b = document.createElement("button");
+      b.className = "chip";
+      b.textContent = g === "" ? "Tutti" : g;
+      b.setAttribute("aria-pressed", String(filter === g));
+      b.addEventListener("click", function(){
+        filter = (filter === g) ? "" : g;
+        buildFilters(); render();
+      });
+      box.appendChild(b);
+    });
+  }
+
+  function render(){
+    var raw = qEl.value.trim();
+    var q = norm(raw);
+    clearEl.classList.toggle("hide", raw === "");
+
+    var pool = items.filter(function(it){ return !filter || it.g === filter; });
+    var hits;
+    if(q){
+      hits = pool.filter(function(it){ return norm(it.n).indexOf(q) !== -1; });
+      hits.sort(function(a,b){
+        var ia = norm(a.n).indexOf(q), ib = norm(b.n).indexOf(q);
+        if(ia !== ib) return ia - ib;
+        return a.n.localeCompare(b.n);
+      });
+    } else {
+      hits = pool.slice().sort(function(a,b){ return a.n.localeCompare(b.n); });
+    }
+
+    resEl.innerHTML = "";
+    hits.forEach(function(it){
+      var li = document.createElement("li");
+      li.className = "row";
+      var b = document.createElement("button");
+      b.className = "pick";
+      b.innerHTML = '<span class="nm"></span><span class="grp"></span><span class="pr"></span>';
+      b.querySelector(".nm").textContent = it.n;
+      b.querySelector(".grp").textContent = it.g;
+      b.querySelector(".pr").textContent = fmt(it.p) + " €";
+      b.addEventListener("click", function(){ openSheet(it); });
+      li.appendChild(b);
+      resEl.appendChild(li);
+    });
+
+    if(hits.length === 0){
+      if(q){
+        emptyEl.innerHTML = 'Nessun articolo trovato per <b></b>. Controlla il nome o aggiungilo da Modifica.';
+        emptyEl.querySelector("b").textContent = raw;
+      } else if(items.length === 0){
+        emptyEl.textContent = "Nessun articolo. Aggiungi il primo da Modifica.";
+      } else {
+        emptyEl.textContent = "Nessun articolo in questo gruppo.";
+      }
+      emptyEl.style.display = "block";
+    } else {
+      emptyEl.style.display = "none";
+    }
+    document.getElementById("count").textContent = items.length + " articoli";
+  }
+
+  qEl.addEventListener("input", render);
+  clearEl.addEventListener("click", function(){ qEl.value=""; qEl.focus(); render(); });
+
+  /* ---------- scheda articolo ---------- */
+  var sheet = document.getElementById("sheet");
+  var amount = document.getElementById("amount");
+
+  function openSheet(it){
+    current = it;
+    document.getElementById("dName").textContent = it.n;
+    document.getElementById("dMeta").textContent = it.g;
+    amount.value = fmt(it.p);
+    updateNote();
+    if(typeof sheet.showModal === "function") sheet.showModal();
+    else sheet.setAttribute("open","");
+  }
+  function closeSheet(){
+    if(sheet.close && sheet.open) sheet.close(); else sheet.removeAttribute("open");
+  }
+  function updateNote(){
+    var note = document.getElementById("dNote");
+    var v = parseNum(amount.value);
+    if(!current || !isFinite(v) || Math.abs(v - current.p) < 0.005){
+      note.textContent = "Prezzo di listino"; return;
+    }
+    var diff = v - current.p;
+    note.textContent = "Listino " + fmt(current.p) + " € · " + (diff > 0 ? "+" : "−") + fmt(Math.abs(diff)) + " €";
+    var b = document.createElement("button");
+    b.textContent = "azzera";
+    b.addEventListener("click", function(){ amount.value = fmt(current.p); updateNote(); });
+    note.appendChild(b);
+  }
+  amount.addEventListener("input", updateNote);
+  amount.addEventListener("blur", function(){
+    var v = parseNum(amount.value);
+    if(isFinite(v)) amount.value = fmt(v);
+    updateNote();
+  });
+  Array.prototype.forEach.call(document.querySelectorAll(".steps button"), function(b){
+    b.addEventListener("click", function(){
+      var v = parseNum(amount.value);
+      if(!isFinite(v)) v = current ? current.p : 0;
+      v = Math.max(0, v + parseFloat(b.getAttribute("data-step")));
+      amount.value = fmt(v);
+      updateNote();
+    });
+  });
+  document.getElementById("copyOne").addEventListener("click", function(){
+    if(!current) return;
+    var v = parseNum(amount.value);
+    if(!isFinite(v)) v = current.p;
+    copyText(current.n + " — " + fmt(v) + " €", "Prezzo copiato");
+  });
+  document.getElementById("closeSheet").addEventListener("click", closeSheet);
+  sheet.addEventListener("click", function(e){ if(e.target === sheet) closeSheet(); });
+
+  /* ---------- modifica ---------- */
+  var tEdit = document.getElementById("toggleEdit");
+  tEdit.addEventListener("click", function(){
+    editing = !editing;
+    document.getElementById("viewSearch").classList.toggle("hide", editing);
+    document.getElementById("viewEdit").classList.toggle("hide", !editing);
+    tEdit.textContent = editing ? "Fine" : "Modifica";
+    if(editing){ renderEdit(); refreshBackup(); } else { render(); }
+    window.scrollTo(0,0);
+  });
+
+  function groupSelect(sel){
+    var s = document.createElement("select");
+    GROUPS.forEach(function(g){
+      var o = document.createElement("option");
+      o.value = g; o.textContent = g;
+      if(g === sel) o.selected = true;
+      s.appendChild(o);
+    });
+    return s;
+  }
+
+  function renderEdit(){
+    var box = document.getElementById("editList");
+    box.innerHTML = "";
+    items.slice().sort(function(a,b){
+      if(a.g !== b.g) return GROUPS.indexOf(a.g) - GROUPS.indexOf(b.g);
+      return a.n.localeCompare(b.n);
+    }).forEach(function(it){
+      var row = document.createElement("div");
+      row.className = "field";
+
+      var ni = document.createElement("input");
+      ni.className = "nmi"; ni.value = it.n; ni.setAttribute("autocapitalize","characters");
+      ni.addEventListener("change", function(){
+        var v = ni.value.trim();
+        if(v && v !== it.n){ it.n = v; save(); refreshBackup(); } else { ni.value = it.n; }
+      });
+
+      var pi = document.createElement("input");
+      pi.className = "pri"; pi.value = fmt(it.p); pi.setAttribute("inputmode","decimal");
+      pi.addEventListener("change", function(){
+        var v = parseNum(pi.value);
+        if(isFinite(v) && v >= 0 && v !== it.p){ it.p = v; save(); refreshBackup(); }
+        pi.value = fmt(it.p);
+      });
+
+      var gs = groupSelect(it.g);
+      gs.addEventListener("change", function(){ it.g = gs.value; save(); renderEdit(); refreshBackup(); });
+
+      var del = document.createElement("button");
+      del.className = "del"; del.textContent = "Elimina"; del.setAttribute("aria-label","Elimina " + it.n);
+      del.addEventListener("click", function(){
+        var i = items.indexOf(it);
+        if(i > -1){ items.splice(i,1); save(); renderEdit(); refreshBackup(); toast("Articolo eliminato"); }
+      });
+
+      row.appendChild(ni); row.appendChild(pi); row.appendChild(gs); row.appendChild(del);
+      box.appendChild(row);
+    });
+  }
+
+  var newGroupSel = groupSelect("Listino");
+  newGroupSel.id = "newGroupSel";
+  var placeholder = document.getElementById("newGroup");
+  placeholder.parentNode.replaceChild(newGroupSel, placeholder);
+
+  document.getElementById("addBtn").addEventListener("click", function(){
+    var n = document.getElementById("newName").value.trim();
+    var p = parseNum(document.getElementById("newPrice").value);
+    if(!n){ toast("Manca il nome"); return; }
+    if(!isFinite(p) || p < 0){ toast("Manca il prezzo"); return; }
+    items.push({n:n, p:p, g:newGroupSel.value});
+    save();
+    document.getElementById("newName").value = "";
+    document.getElementById("newPrice").value = "";
+    renderEdit(); refreshBackup();
+    toast(n + " aggiunto");
+  });
+
+  /* ---------- esporta / importa file ---------- */
+  function markExport(){
+    var lbl = dateLabel(new Date());
+    try{ localStorage.setItem(EXP_KEY, lbl); }catch(e){}
+    setStatus(); showLastExport();
+  }
+  function showLastExport(){
+    var when = "";
+    try{ when = localStorage.getItem(EXP_KEY) || ""; }catch(e){}
+    document.getElementById("lastExport").textContent =
+      when ? "Ultima copia esportata il " + when : "Non hai ancora esportato nessuna copia.";
+  }
+  document.getElementById("exportFile").addEventListener("click", function(){
+    var d = new Date();
+    var name = "listino-" + d.getFullYear() + twoDigits(d.getMonth()+1) + twoDigits(d.getDate()) + ".json";
+    var blob = new Blob([JSON.stringify({listino:items}, null, 1)], {type:"application/json"});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url; a.download = name; a.rel = "noopener";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+    markExport();
+    toast("Scegli Salva su File");
+  });
+  var fileInput = document.getElementById("fileInput");
+  document.getElementById("importFile").addEventListener("click", function(){ fileInput.click(); });
+  fileInput.addEventListener("change", function(){
+    var f = fileInput.files && fileInput.files[0];
+    if(!f) return;
+    var r = new FileReader();
+    r.onload = function(){
+      var parsed;
+      try{ parsed = JSON.parse(String(r.result)); }catch(e){ toast("File non valido"); return; }
+      var arr = clean(Array.isArray(parsed) ? parsed : (parsed && parsed.listino) || (parsed && parsed.items));
+      if(!arr.length){ toast("Nel file non ci sono articoli"); return; }
+      items = arr; save(); renderEdit(); refreshBackup();
+      toast(arr.length + " articoli caricati");
+    };
+    r.onerror = function(){ toast("Non riesco a leggere il file"); };
+    r.readAsText(f);
+    fileInput.value = "";
+  });
+
+  /* ---------- copia testo ---------- */
+  function refreshBackup(){ document.getElementById("backup").value = serial(); }
+  document.getElementById("copyBackup").addEventListener("click", function(){
+    copyText(document.getElementById("backup").value, "Copia di sicurezza copiata");
+  });
+  document.getElementById("loadBackup").addEventListener("click", function(){
+    var txt = document.getElementById("backup").value.trim(), parsed;
+    try{ parsed = JSON.parse(txt); }catch(e){ toast("Il testo non è valido"); return; }
+    var arr = clean(Array.isArray(parsed) ? parsed : (parsed && parsed.listino) || (parsed && parsed.items));
+    if(!arr.length){ toast("Il testo non contiene articoli"); return; }
+    items = arr; save(); renderEdit(); refreshBackup(); toast("Listino caricato");
+  });
+  document.getElementById("resetAll").addEventListener("click", function(){
+    items = clean(ORIGINALE); save(); renderEdit(); refreshBackup();
+    toast("Listino di partenza ripristinato");
+  });
+
+  /* ---------- avvio ---------- */
+  load();
+  buildFilters();
+  render();
+  setStatus();
+  showLastExport();
+})();
+</script>
+</body>
+</html>
