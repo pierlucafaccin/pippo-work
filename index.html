@@ -111,9 +111,6 @@
   .mtbox input:focus{border-color:var(--pen)}
   .mtbox input.set{border-color:var(--pen);color:var(--pen)}
   .mtbox span{font-size:12px;color:var(--ink-soft);font-weight:600}
-  .totline{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-top:14px;padding-top:10px;
-    border-top:2px solid var(--rule);font-size:15px;font-weight:700}
-  .totline small{font-weight:500;color:var(--ink-soft);font-size:13px}
   .optrow{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:13px;color:var(--ink-soft)}
   .optrow input{width:20px;height:20px;flex:0 0 auto}
   .cartline .cp{font-weight:700;font-variant-numeric:tabular-nums;color:var(--pen)}
@@ -621,16 +618,6 @@ function renderCart(){
       });
     });
   });
-  var tt=cartTotals();
-  if(tt.conMetri){
-    var tl=document.createElement("div"); tl.className="totline";
-    var l=document.createElement("div"); l.textContent="Totale";
-    var rgt=document.createElement("div"); rgt.textContent=fmt2(tt.val)+" €";
-    var sm=document.createElement("small"); sm.textContent=" ("+fmtMt(tt.mt)+" mt";
-    sm.textContent+= tt.conMetri<st.cart.length ? " su "+tt.conMetri+" articoli)" : ")";
-    l.appendChild(sm);
-    tl.appendChild(l); tl.appendChild(rgt); box.appendChild(tl);
-  }
   var t=document.getElementById("cartText");
   if(!t.classList.contains("hide")) t.value=cartText();
   renderMail();
@@ -697,7 +684,7 @@ function paintSub(){
   var t=document.getElementById("cartbarTxt"); t.innerHTML="";
   var b=document.createElement("b"); b.textContent=n+(n===1?" tessuto":" tessuti");
   var s=document.createElement("small");
-  s.textContent = tt.conMetri ? (fmtMt(tt.mt)+" mt · "+fmt2(tt.val)+" €") : "tocca Apri per i metri";
+  s.textContent = tt.conMetri ? (fmtMt(tt.mt)+" mt") : "tocca Apri per i metri";
   t.appendChild(b); t.appendChild(s);
 }
 
