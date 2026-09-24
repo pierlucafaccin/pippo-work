@@ -101,8 +101,21 @@
   .panel p{margin:0 0 10px;font-size:13px;color:var(--ink-soft)}
   .gh{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--pen);margin:14px 0 4px}
   .gh2{font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--ink-soft);margin:8px 0 2px}
-  .cartline{display:flex;align-items:center;gap:8px;padding:7px 0;border-top:1px solid var(--rule)}
-  .cartline .cn{flex:1;min-width:0;font-size:15px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .cartline{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--rule);flex-wrap:wrap}
+  .cartline .cn{flex:1 0 100%;min-width:0;font-size:15px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .cartline .cp{flex:0 0 auto}
+  .mtbox{display:flex;align-items:center;gap:4px;flex:0 0 auto;margin-left:auto}
+  .mtbox input{width:66px;font:inherit;font-size:16px;font-weight:600;padding:6px 7px;text-align:right;
+    border:1.5px solid var(--rule);border-radius:7px;background:var(--paper);color:var(--ink);
+    font-variant-numeric:tabular-nums;-webkit-appearance:none;appearance:none}
+  .mtbox input:focus{border-color:var(--pen)}
+  .mtbox input.set{border-color:var(--pen);color:var(--pen)}
+  .mtbox span{font-size:12px;color:var(--ink-soft);font-weight:600}
+  .totline{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-top:14px;padding-top:10px;
+    border-top:2px solid var(--rule);font-size:15px;font-weight:700}
+  .totline small{font-weight:500;color:var(--ink-soft);font-size:13px}
+  .optrow{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:13px;color:var(--ink-soft)}
+  .optrow input{width:20px;height:20px;flex:0 0 auto}
   .cartline .cp{font-weight:700;font-variant-numeric:tabular-nums;color:var(--pen)}
   .cartline .cp.up{color:var(--up)}
   .cartline .cp.dn{color:var(--dn)}
@@ -172,7 +185,30 @@
       <button id="showText">Mostra il testo</button>
       <button class="danger" id="emptyCart">Svuota</button>
     </div>
+    <div class="optrow">
+      <input type="checkbox" id="optTot">
+      <label for="optTot">Nel testo copiato aggiungi l'importo di ogni riga e il totale</label>
+    </div>
     <textarea id="cartText" class="hide" spellcheck="false" readonly></textarea>
+
+    <div class="panel" id="mailPanel" style="margin-top:14px">
+      <h3>Manda per mail</h3>
+      <p>Apre la mail già scritta con dentro il carrello: controlli e invii dalla tua app di posta.</p>
+      <div class="field" id="mailSavedRow">
+        <select id="mailSel"></select>
+        <button class="del" id="mailDel">Elimina</button>
+      </div>
+      <div class="field">
+        <input class="nmi" id="mailTo" type="email" inputmode="email" autocapitalize="off" autocorrect="off" placeholder="nome@cliente.it">
+        <button class="primary" id="mailSave" style="padding:10px 14px;font-size:15px">Salva</button>
+      </div>
+      <div class="field">
+        <input class="nmi" id="mailSub" placeholder="Oggetto">
+      </div>
+      <div class="rowbtns">
+        <button class="go" id="mailGo">Apri la mail</button>
+      </div>
+    </div>
   </div>
 
   <div id="vEdit" class="hide">
@@ -277,6 +313,12 @@ var st=null, view="search", fD="", fL="", fG="", storageOk=true;
 function clone(o){ return JSON.parse(JSON.stringify(o)); }
 function norm(s){ return String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]/g,""); }
 function fmt(v){ return (Math.round(v*100)/100).toFixed(2).replace(".",","); }
+function fmt2(v){
+  var t=fmt(v), p=t.split(","), i=p[0], out="", k=0, c;
+  for(c=i.length-1;c>=0;c--){ out=i.charAt(c)+out; k++; if(k%3===0 && c>0 && i.charAt(c-1)!=="-") out="."+out; }
+  return out+","+p[1];
+}
+function fmtMt(v){ return (Math.round(v*100)/100).toString().replace(".",","); }
 function num(s){ var v=parseFloat(String(s).replace(/[^0-9,.\-]/g,"").replace(",",".")); return isFinite(v)?v:NaN; }
 function two(n){ return (n<10?"0":"")+n; }
 function toast(m){ var t=document.getElementById("toast"); t.textContent=m; t.classList.add("on");
@@ -297,9 +339,10 @@ function save(){
 }
 function load(){
   try{ var raw=localStorage.getItem(KEY);
-    if(raw){ var o=JSON.parse(raw); if(o&&o.data&&o.data.ditte){ st=o; if(!st.cart) st.cart=[]; return true; } }
+    if(raw){ var o=JSON.parse(raw); if(o&&o.data&&o.data.ditte){ st=o; if(!st.cart) st.cart=[];
+      if(!st.mails) st.mails=[]; if(!st.opts) st.opts={}; return true; } }
   }catch(e){ storageOk=false; }
-  st={ data:clone(BASE), cart:[] }; save(); return true;
+  st={ data:clone(BASE), cart:[], mails:[], opts:{} }; save(); return true;
 }
 function originali(){ return clone(BASE); }
 function sur(){ var v=Number(st.data.maggiorazione); return isFinite(v)?v:0.30; }
@@ -499,15 +542,31 @@ function cartBlocks(){
   if(orf.length) blocks.push({ head:"Altri", groups:[{g:"",rows:orf}] });
   return blocks;
 }
+function metri(c){ var m=Number(c.m); return (isFinite(m)&&m>0)?m:0; }
+function cartTotals(){
+  var t={n:st.cart.length, mt:0, val:0, conMetri:0};
+  st.cart.forEach(function(c){ var m=metri(c); if(m){ t.mt+=m; t.val+=cartPrice(c)*m; t.conMetri++; } });
+  return t;
+}
+function lineText(c){
+  var t="• "+c.n+" "+fmt(cartPrice(c))+" €", m=metri(c);
+  if(m){
+    t+=" — "+fmtMt(m)+" mt";
+    if(st.opts && st.opts.rowtotal) t+=" = "+fmt2(cartPrice(c)*m)+" €";
+  }
+  return t;
+}
 function cartText(){
   var out=[];
   cartBlocks().forEach(function(b){
     out.push(b.head.toUpperCase());
     b.groups.forEach(function(gr){
       if(gr.g) out.push(gr.g.toUpperCase());
-      gr.rows.forEach(function(c){ out.push("• "+c.n+" "+fmt(cartPrice(c))+" €"); });
+      gr.rows.forEach(function(c){ out.push(lineText(c)); });
     });
   });
+  var t=cartTotals();
+  if(st.opts && st.opts.rowtotal && t.conMetri) out.push("TOTALE "+fmtMt(t.mt)+" mt — "+fmt2(t.val)+" €");
   return out.join("\n");
 }
 function renderCart(){
@@ -518,9 +577,13 @@ function renderCart(){
     box.appendChild(e);
     document.getElementById("cartBtns").classList.add("hide");
     document.getElementById("cartText").classList.add("hide");
+    document.getElementById("mailPanel").classList.add("hide");
+    document.querySelector(".optrow").classList.add("hide");
     return;
   }
   document.getElementById("cartBtns").classList.remove("hide");
+  document.getElementById("mailPanel").classList.remove("hide");
+  document.querySelector(".optrow").classList.remove("hide");
   cartBlocks().forEach(function(b){
     var h=document.createElement("div"); h.className="gh"; h.textContent=b.head; box.appendChild(h);
     b.groups.forEach(function(gr){
@@ -540,30 +603,101 @@ function renderCart(){
         });
         var x=document.createElement("button"); x.className="mini x"; x.textContent="✕"; x.setAttribute("aria-label","Togli "+c.n);
         x.addEventListener("click",function(){ var i=st.cart.indexOf(c); if(i>-1){ st.cart.splice(i,1); save(); renderCart(); } });
-        r.appendChild(cn); r.appendChild(cp); r.appendChild(tg); r.appendChild(x);
+        var mb=document.createElement("div"); mb.className="mtbox";
+        var mi=document.createElement("input");
+        mi.setAttribute("inputmode","decimal"); mi.setAttribute("placeholder","—");
+        mi.setAttribute("aria-label","Metri di "+c.n);
+        mi.value = metri(c) ? fmtMt(metri(c)) : "";
+        if(metri(c)) mi.className="set";
+        mi.addEventListener("change",function(){
+          var v=num(mi.value);
+          if(isFinite(v)&&v>0){ c.m=v; } else { delete c.m; }
+          save(); renderCart();
+        });
+        var ms=document.createElement("span"); ms.textContent="mt";
+        mb.appendChild(mi); mb.appendChild(ms);
+        r.appendChild(cn); r.appendChild(cp); r.appendChild(mb); r.appendChild(tg); r.appendChild(x);
         box.appendChild(r);
       });
     });
   });
+  var tt=cartTotals();
+  if(tt.conMetri){
+    var tl=document.createElement("div"); tl.className="totline";
+    var l=document.createElement("div"); l.textContent="Totale";
+    var rgt=document.createElement("div"); rgt.textContent=fmt2(tt.val)+" €";
+    var sm=document.createElement("small"); sm.textContent=" ("+fmtMt(tt.mt)+" mt";
+    sm.textContent+= tt.conMetri<st.cart.length ? " su "+tt.conMetri+" articoli)" : ")";
+    l.appendChild(sm);
+    tl.appendChild(l); tl.appendChild(rgt); box.appendChild(tl);
+  }
   var t=document.getElementById("cartText");
   if(!t.classList.contains("hide")) t.value=cartText();
+  renderMail();
 }
+document.getElementById("optTot").addEventListener("change",function(){
+  if(!st.opts) st.opts={};
+  st.opts.rowtotal=this.checked; save(); renderCart();
+});
 document.getElementById("copyCart").addEventListener("click",function(){ copyText(cartText(),"Carrello copiato"); });
 document.getElementById("showText").addEventListener("click",function(){
   var t=document.getElementById("cartText"); t.value=cartText(); t.classList.toggle("hide");
 });
 document.getElementById("emptyCart").addEventListener("click",function(){ st.cart=[]; save(); renderCart(); toast("Carrello svuotato"); });
+function renderMail(){
+  document.getElementById("optTot").checked = !!(st.opts && st.opts.rowtotal);
+  var sel=document.getElementById("mailSel"), row=document.getElementById("mailSavedRow");
+  var list=st.mails||[];
+  row.classList.toggle("hide", list.length===0);
+  var keep=sel.value;
+  sel.innerHTML="";
+  var o0=document.createElement("option"); o0.value=""; o0.textContent="Indirizzi salvati…"; sel.appendChild(o0);
+  list.forEach(function(m){
+    var o=document.createElement("option"); o.value=m; o.textContent=m; sel.appendChild(o);
+  });
+  if(keep && list.indexOf(keep)>-1) sel.value=keep;
+  var sub=document.getElementById("mailSub");
+  if(!sub.value){
+    var d=new Date();
+    sub.value="Prezzi tessuti "+two(d.getDate())+"/"+two(d.getMonth()+1)+"/"+d.getFullYear();
+  }
+}
+document.getElementById("mailSel").addEventListener("change",function(){
+  if(this.value) document.getElementById("mailTo").value=this.value;
+});
+document.getElementById("mailSave").addEventListener("click",function(){
+  var v=document.getElementById("mailTo").value.trim();
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){ toast("Indirizzo non valido"); return; }
+  if(!st.mails) st.mails=[];
+  if(st.mails.indexOf(v)>-1){ toast("Già salvato"); return; }
+  st.mails.push(v); save(); renderMail(); toast("Indirizzo salvato");
+});
+document.getElementById("mailDel").addEventListener("click",function(){
+  var v=document.getElementById("mailSel").value;
+  if(!v){ toast("Scegli prima un indirizzo salvato"); return; }
+  st.mails=st.mails.filter(function(m){ return m!==v; });
+  save(); renderMail(); toast("Indirizzo eliminato");
+});
+document.getElementById("mailGo").addEventListener("click",function(){
+  if(!st.cart.length){ toast("Il carrello è vuoto"); return; }
+  var to=document.getElementById("mailTo").value.trim();
+  var sub=document.getElementById("mailSub").value.trim();
+  var body=cartText();
+  if(body.length>1500) toast("Carrello lungo: se la mail arriva tagliata, usa Copia");
+  var url="mailto:"+encodeURIComponent(to)+"?subject="+encodeURIComponent(sub)+"&body="+encodeURIComponent(body);
+  window.location.href=url;
+});
 document.getElementById("cartbarOpen").addEventListener("click",function(){ go("cart"); });
 document.getElementById("cartbarCopy").addEventListener("click",function(){ copyText(cartText(),"Carrello copiato"); });
 
 function paintSub(){
-  var tot=0; st.cart.forEach(function(c){ tot+=cartPrice(c); });
-  var n=st.cart.length;
+  var tt=cartTotals(), n=tt.n;
   document.getElementById("sub").textContent = storageOk ? (IDX.length+" tessuti") : "attenzione: non salva su questo browser";
   document.getElementById("cartbar").classList.toggle("hide", n===0 || view==="cart");
   var t=document.getElementById("cartbarTxt"); t.innerHTML="";
   var b=document.createElement("b"); b.textContent=n+(n===1?" tessuto":" tessuti");
-  var s=document.createElement("small"); s.textContent="totale "+fmt(tot)+" €";
+  var s=document.createElement("small");
+  s.textContent = tt.conMetri ? (fmtMt(tt.mt)+" mt · "+fmt2(tt.val)+" €") : "tocca Apri per i metri";
   t.appendChild(b); t.appendChild(s);
 }
 
